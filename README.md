@@ -52,6 +52,24 @@ npm run dev
 Open the URL shown in the terminal to see the Pricing page. Change a token in `src/index.css`, save, and the app updates live.
 
 ---
+## Theming (light / dark)
+The app supports light/dark theming by toggling the `dark` class on the `<html>` element.
+
+### Switching via the UI
+Use the **☀️ Light / 🌙 Dark** toggle button in the top-right of the page (it persists via `localStorage`).
+
+### Switching in code
+- Add dark mode: `document.documentElement.classList.add('dark')`
+- Switch to light mode: `document.documentElement.classList.remove('dark')`
+- Toggle: `document.documentElement.classList.toggle('dark')`
+
+### First load behavior
+On first load, the app reads `localStorage.theme`; if it’s missing, it falls back to `prefers-color-scheme: dark`, then applies the class to `<html>` *before paint* to avoid a flash.
+
+### Where to edit dark colours
+Edit the dark palette in `src/index.css` inside the `html.dark { ... }` block. It overrides semantic/component tokens (so classes like `bg-surface`, `text-text-primary`, `bg-btn-primary`, etc. resolve to the correct dark values).
+
+---
 
 ## Project structure
 
@@ -71,6 +89,8 @@ src/
     │   └── PricingCard.jsx
     └── Button/
         └── Button.jsx
+    └── ThemeToggle/
+        └── ThemeToggle.jsx
 ```
 
 Components use **Tailwind utility classes** (e.g. `bg-card`, `text-text-primary`) that reference the tokens in `index.css`. There are no separate `.css` files per component.
@@ -84,7 +104,7 @@ Components use **Tailwind utility classes** (e.g. `bg-card`, `text-text-primary`
 | Entry point | `src/index.jsx` — renders `<App />` |
 | Root component | `src/App.jsx` — renders pages (e.g. `<Pricing />`) |
 | Pages | `src/pages/Pricing.jsx` — assembles components and data |
-| Reusable components | `src/components/PricingCard/`, `src/components/Button/` |
+| Reusable components | `src/components/PricingCard/`, `src/components/Button/`, `src/components/ThemeToggle/` |
 | Design tokens | `src/index.css` — `@theme` block; Tailwind generates classes from token names |
 
 Vite uses **`src`** as the project root (`vite.config.js`); the dev server serves from `src/index.html`.
