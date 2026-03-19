@@ -81,6 +81,7 @@
 .text-text-primary   { color: var(--color-text-primary); }    /* → TOKEN: headings, body */
 .text-text-muted     { color: var(--color-text-muted); }      /* → TOKEN: secondary info */
 .text-text-secondary { color: var(--color-text-secondary); }   /* → TOKEN: subtle UI text */
+.text-btn-primary-text { color: var(--color-btn-primary-text); } /* → TOKEN: primary button text */
 .text-white          { color: #fff; }
 
 
